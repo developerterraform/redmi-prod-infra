@@ -29,5 +29,14 @@ variable "ami_id" {
   type        = string
   default     = "ami-02e94b011299ef128"
 }
-
+variable "domain_name" {
+  description = "Doamain Name"
+  type        = string
+  default     = "rmpaws.cloud"
+}
+variable "hostname" {
+  description = "Subdomain name"
+  type        = string
+  default     = "redmigit"
+}
 

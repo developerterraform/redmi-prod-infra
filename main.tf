@@ -109,3 +109,14 @@ resource "aws_instance" "frontend" {
     create_before_destroy = true
   }
 }
+#======================================================
+#    HOSTED ZONE CREATION
+#======================================================
+resource "aws_route53_record" "record" {
+
+  zone_id = data.aws_route53_zone.zoneinfo.id
+  name    = "${var.hostname}.${var.domain_name}"
+  type    = "A"
+  ttl     = 60
+  records = [aws_instance.frontend.public_ip]
+}
