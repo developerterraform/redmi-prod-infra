@@ -24,4 +24,10 @@ variable "project_owner" {
   type        = string
   default     = "RMP"
 }
+variable "ami_id" {
+  description = "project_ami"
+  type        = string
+  default     = "ami-02e94b011299ef128"
+}
+
 
