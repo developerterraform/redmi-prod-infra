@@ -109,6 +109,19 @@ resource "aws_instance" "frontend" {
     create_before_destroy = true
   }
 }
+#===========================================================
+#Elastic IP  creation for EC2 instance
+#===========================================================
+resource "aws_eip" "public" {
+  instance = aws_instance.frontend.id
+  domain   = "vpc"
+  tags = {
+    Name    = "${var.project_name}-${var.project_env}"
+    Project = var.project_name
+    Env     = var.project_env
+    Owner   = var.project_owner
+  }
+}
 #======================================================
 #    HOSTED ZONE CREATION
 #======================================================
@@ -118,5 +131,5 @@ resource "aws_route53_record" "record" {
   name    = "${var.hostname}.${var.domain_name}"
   type    = "A"
   ttl     = 60
-  records = [aws_instance.frontend.public_ip]
+  records = [aws_eip.public.public_ip]
 }
